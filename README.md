@@ -4,7 +4,7 @@
 
 **MapLeads Pro** is a web-based lead generation and business research tool designed to automate Google Maps business searches across multiple services and locations.
 
-Instead of manually searching Google Maps for every service and city, users can enter multiple services and locations. MapLeads Pro automatically creates the required **service × location combinations**, runs the searches, processes business profiles, collects available business information, provides filtering options, and exports results to Excel.
+Instead of manually searching Google Maps for every service and city, users can enter multiple services and locations. MapLeads Pro automatically creates every **service × location combination**, runs the searches, processes business profiles, collects available business information, provides filtering options, and exports results to Excel.
 
 ---
 
@@ -14,19 +14,17 @@ Instead of manually searching Google Maps for every service and city, users can 
 
 Enter multiple services and locations in a single job.
 
-For example:
+**Example Services:**
 
-**Services**
+* Plumbers
+* Electricians
+* Roofers
 
-- Plumbers
-- Electricians
-- Roofers
+**Example Locations:**
 
-**Locations**
-
-- New York
-- Chicago
-- Houston
+* New York
+* Chicago
+* Houston
 
 MapLeads Pro automatically creates combinations such as:
 
@@ -42,150 +40,175 @@ Electricians × Houston
 Roofers × New York
 Roofers × Chicago
 Roofers × Houston
+```
 
 This allows multiple searches to be managed through a single workflow.
 
-**📊 Configurable Search Limits
-**
+---
+
+### 📊 Configurable Search Limits
+
 Users can choose how many businesses to process for each search.
 
 Available options include:
 
-5 — Fast Test
-10
-25 — Recommended
-50
-100
-200
-500
-1000 — Maximum
-Custom
+|  Limit | Purpose       |
+| -----: | ------------- |
+|      5 | Fast Test     |
+|     10 | Small Search  |
+|     25 | Recommended   |
+|     50 | Medium Search |
+|    100 | Large Search  |
+|    200 | Large Search  |
+|    500 | High Volume   |
+|   1000 | Maximum       |
+| Custom | User-defined  |
 
 This allows users to perform small tests as well as larger lead-generation searches.
 
-**🔄 Search Controls
-**
+---
+
+### 🔄 Search Controls
+
 The dashboard provides controls for managing the automation process:
 
-▶️ Start
-⏸️ Pause
-▶️ Resume
-⏹️ Stop
-📈 Live Automation Progress
+* ▶️ Start
+* ⏸️ Pause
+* ▶️ Resume
+* ⏹️ Stop
+* 📈 Live Automation Progress
 
-The dashboard provides live information about the current search job.
+Users can monitor:
 
-**Users can monitor:
-**
-Overall job completion
-Search queue
-Total search combinations
-Current search
-Total businesses found
-Profiles processed
-Remaining businesses
-Active target
-Current extraction status
-🧹 Duplicate Management
+* Overall job completion
+* Search queue
+* Total search combinations
+* Current search
+* Total businesses found
+* Profiles processed
+* Remaining businesses
+* Active target
+* Current extraction status
+
+---
+
+### 🧹 Duplicate Management
 
 MapLeads Pro provides options for handling duplicate businesses.
 
-**Available options include:
-**
-Remove & Merge
-Keep All
+Available options include:
+
+* **Remove & Merge**
+* **Keep All**
 
 This helps keep exported lead data organized and reduces unnecessary duplicate records.
 
-**🎯 Lead Filtering
-**
-Collected business records can be filtered from the dashboard.
+---
 
-Service
+### 🎯 Lead Filtering
+
+Collected business records can be filtered directly from the dashboard.
+
+#### Service
 
 Filter businesses according to the searched service or category.
 
-Location
+#### Location
 
 Filter businesses according to the searched location.
 
-Google Maps Claim Status
+#### Google Maps Claim Status
 
 Filter results by claim status:
 
-Claim Available
-Claim Not Available
-Unknown
-Email Availability
+* Claim Available
+* Claim Not Available
+* Unknown
+
+#### Email Availability
 
 Filter results according to available email information:
 
-Has Email
-No Email
-📥 Excel Export
+* Has Email
+* No Email
+
+---
+
+### 📥 Excel Export
 
 Collected business data can be exported to:
 
-.xlsx
+**`.xlsx`**
 
 The exported data can be opened using Microsoft Excel and processed further with Python/OpenPyXL.
 
 This can be useful for:
 
-Lead generation
-Sales prospecting
-Local SEO prospecting
-Market research
-Business research
-Outreach preparation
-CRM preparation
+* Lead generation
+* Sales prospecting
+* Local SEO prospecting
+* Market research
+* Business research
+* Outreach preparation
+* CRM preparation
 
-**🖥️ Dashboard
-**
+---
+
+# 🖥️ Dashboard
+
 MapLeads Pro provides a web-based dashboard for managing searches and reviewing collected businesses.
 
 The dashboard includes three primary areas.
 
-**1. Search Inputs & Combination Matrix
-**
+## 1. Search Inputs & Combination Matrix
+
 Users can enter:
 
-Multiple services
-Multiple locations
-Maximum businesses per search
-Duplicate-handling preference
+* Multiple services
+* Multiple locations
+* Maximum businesses per search
+* Duplicate-handling preference
 
-The application then creates the service × location search matrix.
+The application then creates the **service × location search matrix**.
 
-**2. Live Automation Progress
-**
+---
+
+## 2. Live Automation Progress
+
 The progress section allows users to monitor the current job.
 
 It displays information such as:
 
-Overall Completion
-Search Queue
-Current Search
-Total Found
-Profiles Processed
-Remaining
-Active Target
-Extraction Status
+* Overall Completion
+* Search Queue
+* Current Search
+* Total Found
+* Profiles Processed
+* Remaining
+* Active Target
+* Extraction Status
 
-**3. Collected Businesses & Leads
-**
+---
+
+## 3. Collected Businesses & Leads
+
 Collected businesses are displayed in the results section.
 
 Users can:
 
-Review collected businesses
-Filter results
-Filter by service
-Filter by location
-Filter by email availability
-Filter by claim status
-Export results to Excel
-🔄 How MapLeads Pro Works
+* Review collected businesses
+* Filter results
+* Filter by service
+* Filter by location
+* Filter by email availability
+* Filter by claim status
+* Export results to Excel
+
+---
+
+# 🔄 How MapLeads Pro Works
+
+```text
 Enter Services
        ↓
 Enter Locations
@@ -207,23 +230,31 @@ Handle Duplicate Records
 Filter Results
        ↓
 Export Results to Excel
-💡 Example Use Case
+```
+
+---
+
+# 💡 Example Use Case
 
 A digital marketing agency wants to find potential local business prospects in several cities.
 
 The agency could enter:
 
-Services
-Dentists
-Chiropractors
-Lawyers
-Locations
-Dallas
-Austin
-Houston
+### Services
+
+* Dentists
+* Chiropractors
+* Lawyers
+
+### Locations
+
+* Dallas
+* Austin
+* Houston
 
 MapLeads Pro generates the required combinations:
 
+```text
 Dentists × Dallas
 Dentists × Austin
 Dentists × Houston
@@ -235,143 +266,244 @@ Chiropractors × Houston
 Lawyers × Dallas
 Lawyers × Austin
 Lawyers × Houston
+```
 
 The searches can then be processed through the application.
 
 After the search is completed, the collected businesses can be reviewed, filtered, and exported to Excel for further research or business workflows.
 
-**🛠️ Technology Stack
-**
+---
+
+# 🛠️ Technology Stack
+
 MapLeads Pro uses technologies including:
 
-Python
-Flask
-HTML
-CSS
-JavaScript
-OpenPyXL
-Browser Automation
-Web Data Extraction
+* **Python**
+* **Flask**
+* **HTML**
+* **CSS**
+* **JavaScript**
+* **OpenPyXL**
+* **Browser Automation**
+* **Web Data Extraction**
 
+---
 
-**📦 Installation
-Requirements**
+# 📦 Installation
+
+## Requirements
 
 Before running MapLeads Pro, make sure you have:
 
-Windows, macOS, or Linux
-Python 3.x
-pip
+* Windows, macOS, or Linux
+* Python 3.x
+* pip
+* A supported web browser
 
-A supported web browser
-**🪟 Windows CMD Running Guide
-**
+---
+
+# 🪟 Windows CMD Running Guide
+
 This guide explains how to clone and run MapLeads Pro using Windows Command Prompt.
 
-** Install Python
-**
+## 1. Install Python
+
 Install Python 3.x on your computer.
 
 During installation, make sure the following option is enabled:
 
+```text
 Add Python to PATH
+```
 
 After installation, open Command Prompt and run:
 
+```cmd
 python --version
+```
 
 You should see a result similar to:
 
+```text
 Python 3.x.x
+```
 
 Check pip:
 
+```cmd
 pip --version
+```
 
-** Clone the Repository
-**
+---
+
+## 2. Clone the Repository
+
 Open Command Prompt.
 
 Move to the location where you want to store the project.
 
 For example:
 
+```cmd
 cd Desktop
+```
 
+Then clone the repository:
 
-**Start the application with:
-**
+```cmd
+git clone https://github.com/misbahurrehmansaim/GoogleMapLeadGen.git
+```
+
+Move into the project directory:
+
+```cmd
+cd GoogleMapLeadGen
+```
+
+---
+
+## 3. Create a Virtual Environment
+
+Create a Python virtual environment:
+
+```cmd
+python -m venv venv
+```
+
+Activate it:
+
+```cmd
+venv\Scripts\activate
+```
+
+After activation, your CMD should display something similar to:
+
+```text
+(venv) C:\Users\YourName\Desktop\GoogleMapLeadGen>
+```
+
+---
+
+## 4. Install Dependencies
+
+If the repository contains a `requirements.txt` file, install the dependencies with:
+
+```cmd
+pip install -r requirements.txt
+```
+
+If there is no `requirements.txt`, install the required packages according to the project's dependency configuration.
+
+---
+
+## 5. Start the Application
+
+Start the application with:
+
+```cmd
 python server.py
+```
 
 If the server starts successfully, it should display a local address.
 
 For example:
 
+```text
 http://127.0.0.1:5000
+```
 
 Open the displayed address in your web browser.
 
 For example:
 
-http://127.0.0.1:5000
+**http://127.0.0.1:5000**
 
 The MapLeads Pro dashboard should then open.
 
-**⏹️ Stopping the Application
-**
-To stop the running server, return to the Command Prompt window and press:
+---
 
+# ⏹️ Stopping the Application
+
+To stop the running server:
+
+1. Return to the Command Prompt window.
+2. Press:
+
+```text
 CTRL + C
+```
 
 The local server will stop.
 
-**🔁 Running MapLeads Pro Again
-**
+---
+
+# 🔁 Running MapLeads Pro Again
+
 After the project has already been installed, you only need to activate the virtual environment and start the server again.
 
 Open CMD and navigate to the project directory:
 
+```cmd
 cd path\to\GoogleMapLeadGen
+```
 
 Activate the virtual environment:
 
+```cmd
 venv\Scripts\activate
+```
 
-Start the application:
+Start the server:
 
+```cmd
 python server.py
+```
 
 Then open the local address shown in the terminal.
 
-**🧪 Quick Test
-**
+---
+
+# 🧪 Quick Test
+
 For the first test, use a small search instead of a large job.
 
-Example:
+### Example
 
-Service:
+**Service:**
+
+```text
 Plumber
+```
 
-Location:
+**Location:**
+
+```text
 New York
+```
 
-Businesses per search:
+**Businesses per search:**
+
+```text
 5
+```
 
-**Start the search and verify that:
-**
-The search starts successfully
-The progress information updates
-Businesses appear in the results
-Filters work correctly
-The results can be exported to Excel
+Start the search and verify that:
+
+* The search starts successfully
+* Progress information updates
+* Businesses appear in the results
+* Filters work correctly
+* Results can be exported to Excel
 
 After the small test works correctly, larger searches can be performed.
 
-**📁 Project Structure
-**
+---
+
+# 📁 Project Structure
+
 The main project structure is:
 
+```text
 GoogleMapLeadGen/
 │
 ├── .agents/
@@ -391,124 +523,142 @@ GoogleMapLeadGen/
 ├── schema-local-business.json
 │
 └── verified_export.xlsx
+```
 
-**📂 Main Project Files
-**
-server.py
+---
+
+# 📂 Main Project Files
+
+### `server.py`
 
 Main application/server entry point.
 
 It handles the web application and connects the different components of the system.
 
-scraper_engine.py
+### `scraper_engine.py`
 
 Contains the search and business data extraction functionality.
 
-excel_exporter.py
+### `excel_exporter.py`
 
 Handles exporting collected business information to Excel.
 
-verify_pipeline.py
+### `verify_pipeline.py`
 
 Used for testing and verifying parts of the processing pipeline.
 
-templates/
+### `templates/`
 
 Contains the HTML templates used by the web application.
 
-static/
+### `static/`
 
 Contains frontend resources such as CSS, JavaScript, and other static assets.
 
-schema-local-business.json
+### `schema-local-business.json`
 
 Contains the local-business data schema used by the project.
 
-meta-tags-boilerplate.html
+### `meta-tags-boilerplate.html`
 
 Contains reusable HTML/meta-tag content.
 
-GEMINI.md
+### `GEMINI.md`
 
-Project documentation/instructions related to the development workflow.
+Project documentation and development instructions.
 
-MASTER_COMMAND.md
+### `MASTER_COMMAND.md`
 
 Contains project-level commands or development instructions.
 
-verified_export.xlsx
+### `verified_export.xlsx`
 
 Example/generated Excel output from the data-processing workflow.
 
+---
 
+# 📊 Potential Use Cases
 
-**📊 Potential Use Cases
-**
 MapLeads Pro can be used for:
 
-Local SEO prospecting
-Digital marketing research
-Lead generation
-Sales prospecting
-Local business research
-Market research
-Competitor research
-Business data research
-Outreach preparation
-CRM data preparation
-**⚠️ Responsible Use
-**
+* Local SEO prospecting
+* Digital marketing research
+* Lead generation
+* Sales prospecting
+* Local business research
+* Market research
+* Competitor research
+* Business data research
+* Outreach preparation
+* CRM data preparation
+
+---
+
+# ⚠️ Responsible Use
+
 MapLeads Pro is intended for legitimate business research and lead-generation workflows.
 
 Users are responsible for complying with applicable laws, privacy requirements, website terms, and data-protection requirements when using the software.
 
 Use the tool responsibly and do not collect, process, or distribute personal information unlawfully.
 
-**🚧 Project Status
-**System Ready
+---
+
+# 🚧 Project Status
+
+**System Ready**
 
 Current functionality includes:
 
-✅ Multi-service searches
-✅ Multi-location searches
-✅ Service × location combinations
-✅ Configurable search limits
-✅ Start / Pause / Resume / Stop controls
-✅ Live progress tracking
-✅ Duplicate handling
-✅ Lead filtering
-✅ Email availability filtering
-✅ Claim-status filtering
-✅ Excel export
-🔮 Future Improvements
+* ✅ Multi-service searches
+* ✅ Multi-location searches
+* ✅ Service × location combinations
+* ✅ Configurable search limits
+* ✅ Start / Pause / Resume / Stop controls
+* ✅ Live progress tracking
+* ✅ Duplicate handling
+* ✅ Lead filtering
+* ✅ Email availability filtering
+* ✅ Claim-status filtering
+* ✅ Excel export
+
+---
+
+# 🔮 Future Improvements
 
 Planned or possible future improvements include:
 
-Advanced lead scoring
-Automated lead qualification
-CRM integrations
-Additional export formats
-Advanced analytics
-Scheduled searches
-Additional filtering options
-Improved duplicate detection
-Additional business-data fields
-More automation controls
-**👨‍💻 Author
-****Misbah Ur Rehman Saim
-**
+* Advanced lead scoring
+* Automated lead qualification
+* CRM integrations
+* Additional export formats
+* Advanced analytics
+* Scheduled searches
+* Additional filtering options
+* Improved duplicate detection
+* Additional business-data fields
+* More automation controls
+
+---
+
+# 👨‍💻 Author
+
+**Misbah Ur Rehman Saim**
+
 Digital Marketing & SEO Specialist
 
-GitHub
+### GitHub
 
 https://github.com/misbahurrehmansaim
 
-LinkedIn
+### LinkedIn
 
 https://www.linkedin.com/in/misbahurrehmansaim
 
-**⭐ Support
-**
-If you find MapLeads Pro useful, consider giving the repository a ⭐ on GitHub.
+---
+
+# ⭐ Support
+
+If you find **MapLeads Pro** useful, consider giving the repository a ⭐ on GitHub.
 
 Suggestions, improvements, and contributions are welcome.
