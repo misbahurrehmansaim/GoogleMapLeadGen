@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Google Maps Business Automation & Lead Engine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans antialiased">
+
+  <!-- Top Navbar -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-blue-500 flex items-center justify-center text-white shadow-md shadow-indigo-100">
+          <i class="fa-solid fa-map-location-dot text-lg"></i>
+        </div>
+        <div>
+          <h1 class="text-lg font-bold text-slate-900 tracking-tight leading-none">MapLeads Pro</h1>
+          <p class="text-xs text-slate-500 font-medium mt-0.5">Google Maps Multi-Service & Multi-Location Lead Engine</p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <!-- Live System Status Badge -->
+        <div id="statusBadge" class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+          <span id="statusDot" class="w-2 h-2 rounded-full bg-slate-400 mr-2"></span>
+          <span id="statusText">System Ready</span>
+        </div>
+
+        <a href="#resultsSection" class="inline-flex items-center px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+          <i class="fa-solid fa-database mr-1.5 text-slate-500"></i>
+          Collected Leads (<span id="topCollectedCount">0</span>)
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 flex-1 w-full">
+
+    <!-- 1. Input & Search Configuration -->
+    <section class="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-5">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+        <div>
+          <h2 class="text-base font-bold text-slate-900 flex items-center">
+            <span class="w-6 h-6 rounded-md bg-indigo-50 text-indigo-600 flex items-center justify-center text-xs mr-2 font-bold">1</span>
+            Search Inputs & Combination Matrix
+          </h2>
+          <p class="text-xs text-slate-500 mt-0.5">Paste multiple services and locations (one per line or separated by commas). The system creates every service × location combination automatically.</p>
+        </div>
+        <button id="btnLoadSample" type="button" class="text-xs font-medium text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 px-3 py-1.5 rounded-lg transition flex items-center">
+          <i class="fa-solid fa-wand-magic-sparkles mr-1.5"></i> Load Sample Test Data
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <!-- Services Input -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between">
+            <label for="servicesInput" class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center">
+              <i class="fa-solid fa-tags text-indigo-500 mr-1.5"></i> Services / Categories
+            </label>
+            <span id="servicesCount" class="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded">0 services</span>
+          </div>
+          <textarea id="servicesInput" rows="4" class="w-full text-sm font-mono p-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition resize-y" placeholder="Dumpster Rental&#10;Pest Control&#10;Roofing&#10;Plumbing&#10;Electrician"></textarea>
+          <div id="servicesBadges" class="flex flex-wrap gap-1.5 pt-1 min-h-[26px]"></div>
+        </div>
+
+        <!-- Locations Input -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between">
+            <label for="locationsInput" class="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center">
+              <i class="fa-solid fa-location-dot text-rose-500 mr-1.5"></i> Locations / Cities / States
+            </label>
+            <span id="locationsCount" class="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded">0 locations</span>
+          </div>
+          <textarea id="locationsInput" rows="4" class="w-full text-sm font-mono p-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition resize-y" placeholder="New York&#10;California&#10;Los Angeles&#10;Chicago&#10;Houston"></textarea>
+          <div id="locationsBadges" class="flex flex-wrap gap-1.5 pt-1 min-h-[26px]"></div>
+        </div>
+      </div>
+
+      <!-- Combinations Preview Accordion -->
+      <div class="rounded-xl border border-slate-200 overflow-hidden bg-slate-50/50">
+        <div class="px-4 py-2.5 bg-slate-100/70 border-b border-slate-200 flex items-center justify-between cursor-pointer select-none" id="combosHeader">
+          <div class="flex items-center space-x-2 text-xs font-semibold text-slate-700">
+            <i class="fa-solid fa-layer-group text-slate-500"></i>
+            <span>Generated Combinations Queue (<span id="combosCount" class="text-indigo-600 font-bold">0</span> searches)</span>
+          </div>
+          <button type="button" class="text-slate-400 hover:text-slate-600 text-xs">
+            <i id="combosToggleIcon" class="fa-solid fa-chevron-down transition-transform"></i>
+          </button>
+        </div>
+        <div id="combosBody" class="p-3 max-h-40 overflow-y-auto hidden">
+          <div id="combosList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 text-xs"></div>
+        </div>
+      </div>
+
+      <!-- Settings & Controls Bar -->
+      <div class="pt-2 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-t border-slate-100">
+        <div class="flex flex-wrap items-center gap-4 text-xs">
+          <!-- Max Results per Search -->
+          <div class="flex items-center space-x-2">
+            <label for="maxResultsSelect" class="font-semibold text-slate-700 whitespace-nowrap">Max businesses / search:</label>
+            <select id="maxResultsSelect" class="bg-white border border-slate-200 text-slate-800 rounded-lg px-2.5 py-1.5 font-medium outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="5">5 (Fast Test)</option>
+              <option value="10">10</option>
+              <option value="25" selected>25 (Recommended)</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="200">200</option>
+              <option value="500">500</option>
+              <option value="1000">1000 (Maximum)</option>
+              <option value="custom">Custom...</option>
+            </select>
+            <input id="maxResultsCustom" type="number" min="1" max="5000" placeholder="e.g. 1000" class="hidden w-24 bg-white border border-slate-200 text-slate-800 rounded-lg px-2 py-1.5 text-xs font-medium outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+
+          <!-- Duplicate Handling Toggle -->
+          <div class="flex items-center space-x-2">
+            <span class="font-semibold text-slate-700">Duplicates:</span>
+            <div class="inline-flex rounded-lg border border-slate-200 bg-slate-100 p-0.5">
+              <button id="btnDedupRemove" type="button" class="px-2.5 py-1 text-xs font-semibold rounded-md bg-white text-indigo-700 shadow-xs transition">Remove & Merge</button>
+              <button id="btnDedupKeep" type="button" class="px-2.5 py-1 text-xs font-medium rounded-md text-slate-600 hover:text-slate-900 transition">Keep All</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Automation Action Buttons -->
+        <div class="flex items-center space-x-2.5">
+          <button id="btnStart" type="button" class="inline-flex items-center px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 shadow-md shadow-indigo-100 hover:shadow-indigo-200 transition">
+            <i class="fa-solid fa-play mr-2"></i> Start Search
+          </button>
+          <button id="btnPause" type="button" disabled class="inline-flex items-center px-4 py-2.5 rounded-xl text-xs font-semibold text-amber-700 bg-amber-50 hover:bg-amber-100 border border-amber-200 disabled:opacity-40 disabled:cursor-not-allowed transition">
+            <i class="fa-solid fa-pause mr-1.5"></i> Pause
+          </button>
+          <button id="btnResume" type="button" disabled class="inline-flex items-center px-4 py-2.5 rounded-xl text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 disabled:opacity-40 disabled:cursor-not-allowed transition">
+            <i class="fa-solid fa-play mr-1.5"></i> Resume
+          </button>
+          <button id="btnStop" type="button" disabled class="inline-flex items-center px-4 py-2.5 rounded-xl text-xs font-semibold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 disabled:opacity-40 disabled:cursor-not-allowed transition">
+            <i class="fa-solid fa-stop mr-1.5"></i> Stop
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Progress & Live Execution Dashboard -->
+    <section class="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-base font-bold text-slate-900 flex items-center">
+          <span class="w-6 h-6 rounded-md bg-blue-50 text-blue-600 flex items-center justify-center text-xs mr-2 font-bold">2</span>
+          Live Automation Progress
+        </h2>
+        <div class="text-xs font-semibold text-slate-600">
+          Status: <span id="progressStatusMsg" class="text-indigo-600 font-bold">Idle</span>
+        </div>
+      </div>
+
+      <!-- Animated Progress Bar -->
+      <div class="space-y-1.5">
+        <div class="flex justify-between text-xs font-medium text-slate-500">
+          <span>Overall Job Completion</span>
+          <span id="progressPercentText" class="font-bold text-slate-800">0%</span>
+        </div>
+        <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden p-0.5 border border-slate-200">
+          <div id="progressBar" class="bg-gradient-to-r from-blue-500 to-indigo-600 h-full rounded-full transition-all duration-300 w-0 progress-striped"></div>
+        </div>
+      </div>
+
+      <!-- Live Metrics Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 pt-2">
+        <div class="bg-slate-50 rounded-xl p-3 border border-slate-100">
+          <div class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Searches Queue</div>
+          <div id="statCombos" class="text-lg font-bold text-slate-800 mt-0.5">0 / 0</div>
+          <div id="statCombosSub" class="text-[11px] text-slate-400 truncate">No active job</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-3 border border-slate-100">
+          <div class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Current Search</div>
+          <div id="statCurrentSearch" class="text-sm font-bold text-indigo-700 truncate mt-1">None</div>
+          <div id="statSearchSub" class="text-[11px] text-slate-400 truncate">Waiting to start</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-3 border border-slate-100">
+          <div class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Total Found</div>
+          <div id="statFound" class="text-lg font-bold text-blue-600 mt-0.5">0</div>
+          <div class="text-[11px] text-slate-400">Listings in feed</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-3 border border-slate-100">
+          <div class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Processed</div>
+          <div id="statProcessed" class="text-lg font-bold text-emerald-600 mt-0.5">0</div>
+          <div class="text-[11px] text-slate-400">Profiles inspected</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-3 border border-slate-100">
+          <div class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Remaining</div>
+          <div id="statRemaining" class="text-lg font-bold text-amber-600 mt-0.5">0</div>
+          <div class="text-[11px] text-slate-400">In current search</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-3 border border-slate-100">
+          <div class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Active Target</div>
+          <div id="statCurrentBiz" class="text-xs font-bold text-slate-800 truncate mt-1">-</div>
+          <div class="text-[11px] text-slate-400 truncate">Extracting data...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Results Section & Table -->
+    <section id="resultsSection" class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col">
+      <!-- Section Header -->
+      <div class="p-6 border-b border-slate-100 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="w-6 h-6 rounded-md bg-emerald-50 text-emerald-600 flex items-center justify-center text-xs font-bold">3</span>
+            <h2 class="text-base font-bold text-slate-900">Collected Businesses & Leads</h2>
+            <span id="tableCountBadge" class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">0 Businesses</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-0.5">Review, filter, and export verified Google Maps business profiles in real-time.</p>
+        </div>
+
+        <!-- Excel Export Button -->
+        <div class="flex items-center space-x-3">
+          <button id="btnExportExcel" type="button" disabled class="inline-flex items-center px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-md shadow-emerald-100 hover:shadow-emerald-200 disabled:opacity-40 disabled:cursor-not-allowed transition">
+            <i class="fa-solid fa-file-excel mr-2 text-sm"></i> Export to Excel (.xlsx)
+          </button>
+        </div>
+      </div>
+
+      <!-- Advanced Filter & Search Controls Bar -->
+      <div class="bg-slate-50/70 p-4 border-b border-slate-200 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3 text-xs">
+        <!-- Quick Search -->
+        <div class="lg:col-span-2 relative">
+          <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400"></i>
+          <input id="filterSearch" type="text" placeholder="Search by name, address, category..." class="w-full pl-8 pr-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+
+        <!-- Filter Service -->
+        <div>
+          <select id="filterService" class="w-full py-1.5 px-2 bg-white border border-slate-200 rounded-lg text-xs outline-none focus:ring-2 focus:ring-indigo-500">
+            <option value="">All Services</option>
+          </select>
+        </div>
+
+        <!-- Filter Location -->
+        <div>
+          <select id="filterLocation" class="w-full py-1.5 px-2 bg-white border border-slate-200 rounded-lg text-xs outline-none focus:ring-2 focus:ring-indigo-500">
+            <option value="">All Locations</option>
+          </select>
+        </div>
+
+        <!-- Filter Claim Status -->
+        <div>
+          <select id="filterClaim" class="w-full py-1.5 px-2 bg-white border border-slate-200 rounded-lg text-xs outline-none focus:ring-2 focus:ring-indigo-500">
+            <option value="">Claim: All</option>
+            <option value="Available">Claim: Available</option>
+            <option value="Not Available">Claim: Not Available</option>
+            <option value="Unknown">Claim: Unknown</option>
+          </select>
+        </div>
+
+        <!-- Toggle Filters (Has Website / Email / Phone) -->
+        <div class="flex items-center space-x-1.5">
+          <select id="filterHasEmail" class="w-full py-1.5 px-2 bg-white border border-slate-200 rounded-lg text-xs outline-none focus:ring-2 focus:ring-indigo-500">
+            <option value="">Email: All</option>
+            <option value="yes">Has Email</option>
+            <option value="no">No Email</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Results Table -->
+      <div class="overflow-x-auto min-h-[300px] max-h-[620px] overflow-y-auto">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead class="bg-slate-100 text-slate-700 font-semibold sticky top-0 z-10 shadow-xs select-none">
+            <tr>
+              <th class="py-3 px-3 w-10 text-center border-b border-slate-200">#</th>
+              <th class="py-3 px-3 border-b border-slate-200 min-w-[200px]">Business Name</th>
+              <th class="py-3 px-3 border-b border-slate-200 min-w-[130px]">Category</th>
+              <th class="py-3 px-3 border-b border-slate-200 min-w-[110px]">Phone</th>
+              <th class="py-3 px-3 border-b border-slate-200 min-w-[160px]">Email</th>
+              <th class="py-3 px-3 border-b border-slate-200 min-w-[80px] text-center">Website</th>
+              <th class="py-3 px-3 border-b border-slate-200 min-w-[220px]">Address</th>
+              <th class="py-3 px-3 border-b border-slate-200 min-w-[90px]">City</th>
+              <th class="py-3 px-3 border-b border-slate-200 min-w-[60px]">State</th>
+              <th class="py-3 px-3 border-b border-slate-200 min-w-[90px] text-center">Rating</th>
+              <th class="py-3 px-3 border-b border-slate-200 min-w-[100px] text-center">Claim Status</th>
+              <th class="py-3 px-3 border-b border-slate-200 min-w-[120px]">Service</th>
+              <th class="py-3 px-3 border-b border-slate-200 min-w-[110px]">Location</th>
+              <th class="py-3 px-3 border-b border-slate-200 w-12 text-center">Maps</th>
+            </tr>
+          </thead>
+          <tbody id="resultsTableBody" class="divide-y divide-slate-100 bg-white">
+            <!-- Empty Placeholder -->
+            <tr id="emptyTablePlaceholder">
+              <td colspan="14" class="py-16 text-center text-slate-400">
+                <i class="fa-solid fa-map-pin text-3xl text-slate-300 mb-3"></i>
+                <p class="font-medium text-sm text-slate-600">No businesses collected yet</p>
+                <p class="text-xs text-slate-400 mt-1">Configure your services and locations above, then click "Start Search".</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Table Footer / Count -->
+      <div class="px-6 py-3 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
+        <span id="tableShowingCount">Showing 0 of 0 businesses</span>
+        <span>Standardized Format: Openpyxl Compatible</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-4 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500">
+      Google Maps Automation Lead Engine &copy; 2026 &bull; Fast, Multi-Service & Multi-Location Lead Generation
+    </div>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
