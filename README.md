@@ -45,8 +45,8 @@ Roofers × Houston
 
 This allows multiple searches to be managed through a single workflow.
 
-📊 Configurable Search Limits
-
+**📊 Configurable Search Limits
+**
 Users can choose how many businesses to process for each search.
 
 Available options include:
@@ -63,8 +63,8 @@ Custom
 
 This allows users to perform small tests as well as larger lead-generation searches.
 
-🔄 Search Controls
-
+**🔄 Search Controls
+**
 The dashboard provides controls for managing the automation process:
 
 ▶️ Start
@@ -75,8 +75,8 @@ The dashboard provides controls for managing the automation process:
 
 The dashboard provides live information about the current search job.
 
-Users can monitor:
-
+**Users can monitor:
+**
 Overall job completion
 Search queue
 Total search combinations
@@ -90,15 +90,15 @@ Current extraction status
 
 MapLeads Pro provides options for handling duplicate businesses.
 
-Available options include:
-
+**Available options include:
+**
 Remove & Merge
 Keep All
 
 This helps keep exported lead data organized and reduces unnecessary duplicate records.
 
-🎯 Lead Filtering
-
+**🎯 Lead Filtering
+**
 Collected business records can be filtered from the dashboard.
 
 Service
@@ -139,14 +139,15 @@ Market research
 Business research
 Outreach preparation
 CRM preparation
-🖥️ Dashboard
 
+**🖥️ Dashboard
+**
 MapLeads Pro provides a web-based dashboard for managing searches and reviewing collected businesses.
 
 The dashboard includes three primary areas.
 
-1. Search Inputs & Combination Matrix
-
+**1. Search Inputs & Combination Matrix
+**
 Users can enter:
 
 Multiple services
@@ -156,8 +157,8 @@ Duplicate-handling preference
 
 The application then creates the service × location search matrix.
 
-2. Live Automation Progress
-
+**2. Live Automation Progress
+**
 The progress section allows users to monitor the current job.
 
 It displays information such as:
@@ -170,8 +171,9 @@ Profiles Processed
 Remaining
 Active Target
 Extraction Status
-3. Collected Businesses & Leads
 
+**3. Collected Businesses & Leads
+**
 Collected businesses are displayed in the results section.
 
 Users can:
@@ -238,8 +240,8 @@ The searches can then be processed through the application.
 
 After the search is completed, the collected businesses can be reviewed, filtered, and exported to Excel for further research or business workflows.
 
-🛠️ Technology Stack
-
+**🛠️ Technology Stack
+**
 MapLeads Pro uses technologies including:
 
 Python
@@ -250,22 +252,24 @@ JavaScript
 OpenPyXL
 Browser Automation
 Web Data Extraction
-📦 Installation
-Requirements
+
+
+**📦 Installation
+Requirements**
 
 Before running MapLeads Pro, make sure you have:
 
 Windows, macOS, or Linux
 Python 3.x
 pip
-Git
-A supported web browser
-🪟 Windows CMD Running Guide
 
+A supported web browser
+**🪟 Windows CMD Running Guide
+**
 This guide explains how to clone and run MapLeads Pro using Windows Command Prompt.
 
-1. Install Python
-
+** Install Python
+**
 Install Python 3.x on your computer.
 
 During installation, make sure the following option is enabled:
@@ -283,19 +287,9 @@ Python 3.x.x
 Check pip:
 
 pip --version
-2. Install Git
 
-Install Git if it is not already installed.
-
-Check Git:
-
-git --version
-
-You should see a result similar to:
-
-git version 2.x.x
-3. Clone the Repository
-
+** Clone the Repository
+**
 Open Command Prompt.
 
 Move to the location where you want to store the project.
@@ -304,42 +298,9 @@ For example:
 
 cd Desktop
 
-Clone the repository:
 
-git clone https://github.com/misbahurrehmansaim/GoogleMapLeadGen.git
-
-Enter the project directory:
-
-cd GoogleMapLeadGen
-4. Create a Virtual Environment
-
-Create a Python virtual environment:
-
-python -m venv venv
-
-Activate the virtual environment:
-
-venv\Scripts\activate
-
-After activation, your CMD should look similar to:
-
-(venv) C:\Users\YourName\Desktop\GoogleMapLeadGen>
-5. Install Dependencies
-
-If the repository contains a requirements.txt file, install the dependencies with:
-
-pip install -r requirements.txt
-
-If a requirements.txt file is not included, install the Python packages required by the project before running the application.
-
-▶️ Running MapLeads Pro
-
-The main application/server file is:
-
-server.py
-
-Start the application with:
-
+**Start the application with:
+**
 python server.py
 
 If the server starts successfully, it should display a local address.
@@ -356,16 +317,16 @@ http://127.0.0.1:5000
 
 The MapLeads Pro dashboard should then open.
 
-⏹️ Stopping the Application
-
+**⏹️ Stopping the Application
+**
 To stop the running server, return to the Command Prompt window and press:
 
 CTRL + C
 
 The local server will stop.
 
-🔁 Running MapLeads Pro Again
-
+**🔁 Running MapLeads Pro Again
+**
 After the project has already been installed, you only need to activate the virtual environment and start the server again.
 
 Open CMD and navigate to the project directory:
@@ -382,8 +343,8 @@ python server.py
 
 Then open the local address shown in the terminal.
 
-🧪 Quick Test
-
+**🧪 Quick Test
+**
 For the first test, use a small search instead of a large job.
 
 Example:
@@ -397,8 +358,8 @@ New York
 Businesses per search:
 5
 
-Start the search and verify that:
-
+**Start the search and verify that:
+**
 The search starts successfully
 The progress information updates
 Businesses appear in the results
@@ -407,8 +368,8 @@ The results can be exported to Excel
 
 After the small test works correctly, larger searches can be performed.
 
-📁 Project Structure
-
+**📁 Project Structure
+**
 The main project structure is:
 
 GoogleMapLeadGen/
@@ -430,7 +391,9 @@ GoogleMapLeadGen/
 ├── schema-local-business.json
 │
 └── verified_export.xlsx
-📂 Main Project Files
+
+**📂 Main Project Files
+**
 server.py
 
 Main application/server entry point.
@@ -477,31 +440,10 @@ verified_export.xlsx
 
 Example/generated Excel output from the data-processing workflow.
 
-🔐 Security
 
-Never commit sensitive information to a public GitHub repository.
 
-Do not upload:
-
-API keys
-Passwords
-Authentication tokens
-Browser cookies
-Session files
-Private credentials
-Secret configuration files
-
-If the project uses environment variables or API credentials, keep them outside the public repository.
-
-A .gitignore file should normally include entries such as:
-
-__pycache__/
-*.pyc
-venv/
-.env
-*.log
-📊 Potential Use Cases
-
+**📊 Potential Use Cases
+**
 MapLeads Pro can be used for:
 
 Local SEO prospecting
@@ -514,16 +456,16 @@ Competitor research
 Business data research
 Outreach preparation
 CRM data preparation
-⚠️ Responsible Use
-
+**⚠️ Responsible Use
+**
 MapLeads Pro is intended for legitimate business research and lead-generation workflows.
 
 Users are responsible for complying with applicable laws, privacy requirements, website terms, and data-protection requirements when using the software.
 
 Use the tool responsibly and do not collect, process, or distribute personal information unlawfully.
 
-🚧 Project Status
-System Ready
+**🚧 Project Status
+**System Ready
 
 Current functionality includes:
 
@@ -552,9 +494,9 @@ Additional filtering options
 Improved duplicate detection
 Additional business-data fields
 More automation controls
-👨‍💻 Author
-Misbah Ur Rehman Saim
-
+**👨‍💻 Author
+****Misbah Ur Rehman Saim
+**
 Digital Marketing & SEO Specialist
 
 GitHub
@@ -565,8 +507,8 @@ LinkedIn
 
 https://www.linkedin.com/in/misbahurrehmansaim
 
-⭐ Support
-
+**⭐ Support
+**
 If you find MapLeads Pro useful, consider giving the repository a ⭐ on GitHub.
 
 Suggestions, improvements, and contributions are welcome.
